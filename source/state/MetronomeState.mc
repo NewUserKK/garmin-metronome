@@ -4,13 +4,13 @@ class MetronomeState {
     public var bpm = 120;
     public var isPlaying = false;
 
-    function setBpm(bpm as Integer) as MetronomeState {
+    public function setBpm(bpm as Integer) as MetronomeState {
         var state = copy();
         state.bpm = bpm;
         return state;
     }
 
-    function setIsPlaying(value as Boolean) as MetronomeState {
+    public function setIsPlaying(value as Boolean) as MetronomeState {
         var state = copy();
         state.isPlaying = value;
         return state;
@@ -75,7 +75,8 @@ class MetronomeStateController {
     private function setState(state as MetronomeState) {
         self.state = state;
         for (var i = 0; i < observers.size(); i++) {
-            observers[i].invoke(state);
+            var observer = observers[i];
+            observer.invoke(state);
         }
     }
 }

@@ -1,0 +1,4 @@
+<resources>
+    <bitmap id="PlaybackPlayIcon" filename="images/playback_play_icon.png" />
+    <bitmap id="PlaybackStopIcon" filename="images/playback_stop_icon.png" />
+</resources>

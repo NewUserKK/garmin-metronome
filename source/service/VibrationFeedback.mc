@@ -9,11 +9,11 @@ class VibrationFeedback extends MetronomeFeedback {
         // TODO: test strength on real devices
 
         var vibrationRegular = new Attention.VibeProfile(
-            /*strengthPercent*/ 30,
+            /*strengthPercent*/ 80,
             /*duration*/ feedbackDurationMs
         );
         var vibrationStrong = new Attention.VibeProfile(
-            /*strengthPercent*/ 50,
+            /*strengthPercent*/ 100,
             /*duration*/ feedbackDurationMs
         );
         var vibrationProfile = isStrong ? vibrationStrong : vibrationRegular;

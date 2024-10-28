@@ -4,7 +4,8 @@ import Toybox.WatchUi;
 
 class MetronomeApp extends Application.AppBase {
 
-    private var stateController as MetronomeStateController or Null;
+    private var stateController as MetronomeStateController?;
+    private var playbackService as MetronomePlaybackService?;
 
     function initialize() {
         AppBase.initialize();
@@ -13,10 +14,14 @@ class MetronomeApp extends Application.AppBase {
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void {
         stateController = new MetronomeStateController();
+        playbackService = new MetronomePlaybackService(stateController);
+        playbackService.start();
     }
 
     // onStop() is called when your application is exiting
     function onStop(state as Dictionary?) as Void {
+        playbackService.stop();
+        playbackService = null;
         stateController = null;
     }
 

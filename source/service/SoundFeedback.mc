@@ -1,17 +1,21 @@
 import Toybox.Attention;
 import Toybox.Lang;
 
-class SoundFeedback {
-    function playSound(isLoud as Boolean) {
+class SoundFeedback extends MetronomeFeedback {
+    function initialize() {
+        MetronomeFeedback.initialize();
+    }
+
+    function produceFeedback(isStrong as Boolean) {
         var toneRegular = new Attention.ToneProfile(
             /*frequency*/ 440,
-            /*duration*/ 150
+            /*duration*/ feedbackDurationMs
         );
         var toneLoud = new Attention.ToneProfile(
             /*frequency*/ 700,
-            /*duration*/ 150
+            /*duration*/ feedbackDurationMs
         );
-        var toneProfile = isLoud ? toneLoud : toneRegular;
+        var toneProfile = isStrong ? toneLoud : toneRegular;
 
         Attention.playTone({:toneProfile=>[toneProfile]});
     }

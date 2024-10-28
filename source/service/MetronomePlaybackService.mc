@@ -9,7 +9,8 @@ class MetronomePlaybackService {
     private var beat = 0;
     private var beatCount = 0;
 
-    private var soundFeedback = new SoundFeedback();
+    private var soundFeedback = new SoundFeedback() as MetronomeFeedback;
+    private var vibrationFeedback = new VibrationFeedback() as MetronomeFeedback;
 
     function initialize(
         stateController as MetronomeStateController
@@ -47,9 +48,8 @@ class MetronomePlaybackService {
 
     function onTimer() as Void {
         var isLoud = beat == 0;
-        soundFeedback.playSound(
-            /*isLoud=*/ isLoud
-        );
+        soundFeedback.produceFeedback(isLoud);
+        vibrationFeedback.produceFeedback(isLoud);
 
         beat = (beat + 1) % beatCount;
     }

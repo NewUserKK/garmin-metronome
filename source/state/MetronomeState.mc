@@ -40,7 +40,14 @@ class MetronomeState {
     }
 }
 
+class MetronomeEvent {
+    class GoBack extends MetronomeEvent {
+        function initialize() { MetronomeEvent.initialize(); }
+    }
+}
+
 typedef MetronomeStateObserver as Method(state as MetronomeState) as Void;
+typedef MetronomeEventObserver as Method(event as MetronomeEvent) as Void;
 
 const MIN_BPM = 25;
 const MAX_BPM = 300;
@@ -48,18 +55,23 @@ const MAX_BPM = 300;
 class MetronomeStateController {
     private var state = new MetronomeState();
 
-    private var observers = [] as Array<MetronomeStateObserver>;
+    private var stateObservers = [] as Array<MetronomeStateObserver>;
+    private var eventObservers = [] as Array<MetronomeEventObserver>;
 
-    public function addObserver(
-        observer as Method(state as MetronomeState) as Void
-    ) {
-        observers.add(observer);
+    public function observeState(observer as MetronomeStateObserver) {
+        stateObservers.add(observer);
     }
 
-    public function removeObserver(
-        observer as Method(state as MetronomeState) as Void
-    ) {
-        observers.remove(observer);
+    public function removeStateObserver(observer as MetronomeStateObserver) {
+        stateObservers.remove(observer);
+    }
+
+    public function observeEvents(observer as MetronomeEventObserver) {
+        eventObservers.add(observer);
+    }
+
+    public function removeEventObserver(observer as MetronomeEventObserver) {
+        eventObservers.remove(observer);
     }
 
     public function togglePlay() {
@@ -80,6 +92,14 @@ class MetronomeStateController {
         setState(state.setBpm(bpm));
     }
 
+    public function handleBack() {
+        if (state.isPlaying) {
+            togglePlay();
+        } else {
+            emitEvent(new MetronomeEvent.GoBack());
+        }
+    }
+
     public function reset() {
         setState(new MetronomeState());
     }
@@ -90,9 +110,16 @@ class MetronomeStateController {
 
     private function setState(state as MetronomeState) {
         self.state = state;
-        for (var i = 0; i < observers.size(); i++) {
-            var observer = observers[i];
+        for (var i = 0; i < stateObservers.size(); i++) {
+            var observer = stateObservers[i];
             observer.invoke(state);
+        }
+    }
+
+    private function emitEvent(event as MetronomeEvent) {
+        for (var i = 0; i < eventObservers.size(); i++) {
+            var observer = eventObservers[i];
+            observer.invoke(event);
         }
     }
 }

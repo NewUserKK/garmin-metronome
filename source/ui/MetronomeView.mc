@@ -5,6 +5,7 @@ class MetronomeView extends WatchUi.View {
 
     private var stateController as MetronomeStateController;
     private var stateObserver as MetronomeStateObserver = method(:onStateChanged);
+    private var eventObserver as MetronomeEventObserver = method(:onEvent);
 
     private var bpmLabel as WatchUi.Text?;
 
@@ -13,8 +14,8 @@ class MetronomeView extends WatchUi.View {
     function initialize(
         stateController as MetronomeStateController
     ) {
-        self.stateController = stateController;
         View.initialize();
+        self.stateController = stateController;
     }
 
     function onLayout(dc as Dc) as Void {
@@ -25,16 +26,14 @@ class MetronomeView extends WatchUi.View {
     }
 
     function onShow() as Void {
-        stateController.addObserver(stateObserver);
+        stateController.observeState(stateObserver);
+        stateController.observeEvents(eventObserver);
         renderState(stateController.getState());
     }
 
-    function onUpdate(dc as Dc) as Void {
-        View.onUpdate(dc);
-    }
-
     function onHide() as Void {
-        stateController.removeObserver(stateObserver);
+        stateController.removeStateObserver(stateObserver);
+        stateController.removeEventObserver(eventObserver);
     }
 
     function onStateChanged(state as MetronomeState) as Void {
@@ -50,6 +49,12 @@ class MetronomeView extends WatchUi.View {
             playbackButton.setState(:playbackButtonPlayingState);
         } else {
             playbackButton.setState(:playbackButtonStoppedState);
+        }
+    }
+
+    function onEvent(event as MetronomeEvent) as Void {
+        if (event instanceof MetronomeEvent.GoBack) {
+            WatchUi.popView(WatchUi.SLIDE_RIGHT);
         }
     }
 }

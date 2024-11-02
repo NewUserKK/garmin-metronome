@@ -21,6 +21,8 @@ class MetronomeDelegate extends WatchUi.BehaviorDelegate {
             stateController.changeBpm(-1);
         } else if (key == KEY_ENTER) {
             stateController.togglePlay();
+        } else if (key == KEY_ESC) {
+            stateController.handleBack();
         }
     
         return true;

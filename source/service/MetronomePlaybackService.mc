@@ -19,11 +19,11 @@ class MetronomePlaybackService {
     }
 
     function start() {
-        stateController.addObserver(stateObserver);
+        stateController.observeState(stateObserver);
     }
 
     function stop() {
-        stateController.removeObserver(stateObserver);
+        stateController.removeStateObserver(stateObserver);
     }
 
     function onStateChanged(state as MetronomeState) as Void {

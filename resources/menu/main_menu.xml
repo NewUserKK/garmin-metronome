@@ -1,0 +1,11 @@
+<menu2 id="MainMenu" title="@Strings.MainMenuTitle">
+    <toggle-menu-item
+        id="menuSoundFeedback"
+        label="@Strings.MainMenuSoundFeedback"
+        checked="true" />
+
+    <toggle-menu-item 
+        id="menuVibrationFeedback"
+        label="@Strings.MainMenuVibartionFeedback"
+        checked="true" />
+</menu2>

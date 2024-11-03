@@ -20,11 +20,22 @@ class MetronomeDelegate extends WatchUi.BehaviorDelegate {
         } else if (key == KEY_DOWN) {
             stateController.changeBpm(-1);
         } else if (key == KEY_ENTER) {
-            stateController.togglePlay();
+            stateController.togglePlayback();
         } else if (key == KEY_ESC) {
             stateController.handleBack();
         }
     
         return true;
+    }
+
+    public function onMenu() {
+        var menu = new MainMenu(stateController);
+        var delegate = new MainMenuDelegate(stateController);
+        WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
+        return true;
+    }
+
+    public function onSettingsClick() {
+        onMenu();
     }
 }

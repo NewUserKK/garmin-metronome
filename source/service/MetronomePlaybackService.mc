@@ -23,6 +23,7 @@ class MetronomePlaybackService {
     }
 
     function stop() {
+        stopPlayback(stateController.getState());
         stateController.removeStateObserver(stateObserver);
     }
 
@@ -40,16 +41,23 @@ class MetronomePlaybackService {
         // TODO: take note type into account
         var rate = 60000 / state.bpm;
         timer.start(
-            method(:onTimer),
+            method(:produceFeedback),
             rate,
             /*repeat=*/ true
         );
     }
 
-    function onTimer() as Void {
-        var isLoud = beat == 0;
-        soundFeedback.produceFeedback(isLoud);
-        vibrationFeedback.produceFeedback(isLoud);
+    function produceFeedback() as Void {
+        var state = stateController.getState();
+        var isStrong = beat == 0;
+
+        if (state.hasSoundFeedback) {
+            soundFeedback.produceFeedback(isStrong);
+        }
+
+        if (state.hasVibrationFeedback) {
+            vibrationFeedback.produceFeedback(isStrong);
+        }
 
         beat = (beat + 1) % beatCount;
     }

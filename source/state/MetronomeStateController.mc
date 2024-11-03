@@ -28,8 +28,20 @@ class MetronomeStateController {
         eventObservers.remove(observer);
     }
 
-    public function togglePlay() {
+    public function togglePlayback() {
         setState(state.setIsPlaying(!state.isPlaying));
+    }
+
+    public function stopPlayback() {
+        setState(state.setIsPlaying(false));
+    }
+
+    public function toggleSoundFeedback() {
+        setState(state.setHasSoundFeedback(!state.hasSoundFeedback));
+    }
+
+    public function toggleVibrationFeedback() {
+        setState(state.setHasVibrationFeedback(!state.hasVibrationFeedback));
     }
 
     public function changeBpm(delta as Integer) {
@@ -48,7 +60,7 @@ class MetronomeStateController {
 
     public function handleBack() {
         if (state.isPlaying) {
-            togglePlay();
+            togglePlayback();
         } else {
             emitEvent(new MetronomeEvent.GoBack());
         }

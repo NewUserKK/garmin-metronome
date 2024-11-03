@@ -3,6 +3,7 @@
 
     <string id="bpm">%d</string>
 
-    <string id="menu_label_1">Item 1</string>
-    <string id="menu_label_2">Item 2</string>
+    <string id="MainMenuTitle">Settings</string>
+    <string id="MainMenuSoundFeedback">Sound</string>
+    <string id="MainMenuVibartionFeedback">Vibration</string>
 </strings>

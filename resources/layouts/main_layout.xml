@@ -9,6 +9,17 @@
         justification="Graphics.TEXT_JUSTIFY_CENTER" />
 
     <button
+        id="settingsButton"
+        class="WatchUi.Button"
+        x="center"
+        y="25%"
+        width="36"
+        height="36"
+        behavior="onSettingsClick">
+        <state id="stateDefault" bitmap="@Drawables.SettingsIcon" />
+    </button>
+
+    <button
         id="playbackButton"
         class="PlaybackButton"
         x="center"

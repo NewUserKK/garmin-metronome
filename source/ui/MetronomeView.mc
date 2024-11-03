@@ -20,8 +20,8 @@ class MetronomeView extends WatchUi.View {
 
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.MainLayout(dc));
-        bpmLabel = WatchUi.View.findDrawableById("bpmText") as WatchUi.Text;
 
+        bpmLabel = WatchUi.View.findDrawableById("bpmText") as WatchUi.Text;
         playbackButton = WatchUi.View.findDrawableById("playbackButton") as WatchUi.Button;
     }
 
@@ -32,6 +32,8 @@ class MetronomeView extends WatchUi.View {
     }
 
     function onHide() as Void {
+        stateController.stopPlayback();
+
         stateController.removeStateObserver(stateObserver);
         stateController.removeEventObserver(eventObserver);
     }

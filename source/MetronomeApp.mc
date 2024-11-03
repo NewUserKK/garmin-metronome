@@ -11,14 +11,12 @@ class MetronomeApp extends Application.AppBase {
         AppBase.initialize();
     }
 
-    // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void {
         stateController = new MetronomeStateController();
         playbackService = new MetronomePlaybackService(stateController);
         playbackService.start();
     }
 
-    // onStop() is called when your application is exiting
     function onStop(state as Dictionary?) as Void {
         playbackService.stop();
         playbackService = null;
@@ -27,7 +25,10 @@ class MetronomeApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        return [ new MetronomeView(stateController), new MetronomeDelegate(stateController) ];
+        return [
+            new MetronomeView(stateController),
+            new MetronomeDelegate(stateController),
+        ];
     }
 
 }

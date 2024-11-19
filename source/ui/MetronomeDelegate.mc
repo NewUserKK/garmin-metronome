@@ -20,7 +20,7 @@ class MetronomeDelegate extends WatchUi.BehaviorDelegate {
         } else if (key == KEY_DOWN) {
             stateController.changeBpm(-1);
         } else if (key == KEY_ENTER) {
-            stateController.togglePlayback();
+            onPlaybackClick();
         } else if (key == KEY_ESC) {
             stateController.handleBack();
         }
@@ -29,13 +29,17 @@ class MetronomeDelegate extends WatchUi.BehaviorDelegate {
     }
 
     public function onMenu() {
-        var menu = new MainMenu(stateController);
-        var delegate = new MainMenuDelegate(stateController);
-        WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
+        onSettingsClick();
         return true;
     }
 
     public function onSettingsClick() {
-        onMenu();
+        var menu = new MainMenu(stateController);
+        var delegate = new MainMenuDelegate(stateController);
+        WatchUi.pushView(menu, delegate, WatchUi.SLIDE_IMMEDIATE);
+    }
+
+    public function onPlaybackClick() {
+        stateController.togglePlayback();
     }
 }

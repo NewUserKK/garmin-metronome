@@ -6,7 +6,8 @@
         text="@Strings.bpm"
         color="Graphics.COLOR_WHITE"
         font="Graphics.FONT_LARGE"
-        justification="Graphics.TEXT_JUSTIFY_CENTER" />
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+    />
 
     <button
         id="settingsButton"
@@ -15,18 +16,35 @@
         y="25%"
         width="36"
         height="36"
-        behavior="onSettingsClick">
+        behavior="onSettingsClick"
+    >
         <state id="stateDefault" bitmap="@Drawables.SettingsIcon" />
+        <state id="stateHighlighted" bitmap="@Drawables.SettingsIcon" />
     </button>
 
     <button
-        id="playbackButton"
-        class="PlaybackButton"
+        id="playButton"
+        class="WatchUi.Button"
         x="center"
         y="60%"
         width="96"
         height="96"
+        behavior="onPlaybackClick"
     >
-        <state id="stateDefault" bitmap="@Drawables.PlaybackPlayIcon" />
+        <state id="stateDefault" bitmap="@Drawables.PlayIcon" />
+        <state id="stateHighlighted" bitmap="@Drawables.PlayIcon" />
+    </button>
+
+    <button
+        id="stopButton"
+        class="WatchUi.Button"
+        x="center"
+        y="60%"
+        width="96"
+        height="96"
+        behavior="onPlaybackClick"
+    >
+        <state id="stateDefault" bitmap="@Drawables.StopIcon" />
+        <state id="stateHighlighted" bitmap="@Drawables.StopIcon" />
     </button>
 </layout>

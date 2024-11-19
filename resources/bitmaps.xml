@@ -1,5 +1,5 @@
 <resources>
-    <bitmap id="PlaybackPlayIcon" filename="images/playback_play_icon.png" />
-    <bitmap id="PlaybackStopIcon" filename="images/playback_stop_icon.png" />
+    <bitmap id="PlayIcon" filename="images/play_icon.png" />
+    <bitmap id="StopIcon" filename="images/stop_icon.png" />
     <bitmap id="SettingsIcon" filename="images/settings_icon.png" />
 </resources>

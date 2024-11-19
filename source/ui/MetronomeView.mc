@@ -9,7 +9,8 @@ class MetronomeView extends WatchUi.View {
 
     private var bpmLabel as WatchUi.Text?;
 
-    private var playbackButton as WatchUi.Button?;
+    private var playButton as WatchUi.Button?;
+    private var stopButton as WatchUi.Button?;
 
     function initialize(
         stateController as MetronomeStateController
@@ -22,7 +23,8 @@ class MetronomeView extends WatchUi.View {
         setLayout(Rez.Layouts.MainLayout(dc));
 
         bpmLabel = WatchUi.View.findDrawableById("bpmText") as WatchUi.Text;
-        playbackButton = WatchUi.View.findDrawableById("playbackButton") as WatchUi.Button;
+        playButton = WatchUi.View.findDrawableById("playButton") as WatchUi.Button;
+        stopButton = WatchUi.View.findDrawableById("stopButton") as WatchUi.Button;
     }
 
     function onShow() as Void {
@@ -48,9 +50,11 @@ class MetronomeView extends WatchUi.View {
         bpmLabel.setText(bpmText);
 
         if (state.isPlaying) {
-            playbackButton.setState(:playbackButtonPlayingState);
+            playButton.setVisible(false);
+            stopButton.setVisible(true);
         } else {
-            playbackButton.setState(:playbackButtonStoppedState);
+            playButton.setVisible(true);
+            stopButton.setVisible(false);
         }
     }
 

@@ -1,6 +1,8 @@
 import Toybox.Lang;
 
 class VibrationFeedback extends MetronomeFeedback {
+    protected var feedbackDurationMs = 50;
+
     function initialize() {
         MetronomeFeedback.initialize();
     }

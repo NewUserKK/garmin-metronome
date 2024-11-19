@@ -2,6 +2,8 @@ import Toybox.Attention;
 import Toybox.Lang;
 
 class SoundFeedback extends MetronomeFeedback {
+    protected var feedbackDurationMs = 150;
+
     function initialize() {
         MetronomeFeedback.initialize();
     }

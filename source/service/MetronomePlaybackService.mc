@@ -40,6 +40,8 @@ class MetronomePlaybackService {
 
         // TODO: take note type into account
         var rate = 60000 / state.bpm;
+
+        produceFeedback();
         timer.start(
             method(:produceFeedback),
             rate,

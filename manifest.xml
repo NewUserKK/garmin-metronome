@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
     <iq:application
-        id="1eb6fbcb-3e52-40df-80ab-39ec2a3f4b9b" type="watch-app"
+        id="1eb6fbcb-3e52-40df-80ab-39ec2a3f4b9b"
+        type="watch-app"
         name="@Strings.AppName"
         entry="MetronomeApp"
         launcherIcon="@Drawables.LauncherIcon"
@@ -9,6 +10,7 @@
 
         <iq:products>
             <iq:product id="fr265" />
+            <iq:product id="fr965" />
         </iq:products>
 
         <iq:permissions />
